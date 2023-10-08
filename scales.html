@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
 
-  <title>Scales</title>
+  <title>Scale Sense</title>
   <link rel="stylesheet" type="text/css" href="scaleStyles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
@@ -18,7 +18,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand">Musical Trainer</a>
+      <a id = "scalesense" class="navbar-brand">Scale Sense</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -52,7 +52,7 @@
 
   
   <div class="slider-container">
-    <label for="slider" class="slider-label">Sensitivity:</label>
+    <label id = 'sens' for="slider" class="slider-label">Sensitivity:</label>
     <input type="range" min="10" max="50" value="30" class="slider" id="slider">
     <p id="transpositionVal">Transposition: Concert</p>
   </div>

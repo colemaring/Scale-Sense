@@ -15,3 +15,23 @@ body{
     display: inline-block; /* Make the buttons inline horizontally */
     margin: 5px; /* Add margin for spacing between buttons */
   }
+
+  #homeButtonScore{
+    background-color: #7f00ae;
+  }
+  #tryAgain{
+    background-color: #7f00ae;
+  }
+
+  #wrongNotes{
+    font-size: 25px;
+  }
+
+  span{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#buttonHolder{
+  margin-top:60px;
+}

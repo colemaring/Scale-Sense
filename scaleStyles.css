@@ -4,13 +4,29 @@ body{
 
 
 span{
-    font-size: 70px;
+    font-size: 62px;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     white-space:pre;
 }
 
+#scalesense{
+  font-weight: 600;
+}
 
+#sens{
+  font-size:25px;
+  font-weight: 500;
+}
+
+#homeButton{
+  background-color: #7f00ae;
+}
+
+#transpositionVal{
+  font-size:25px;
+  font-weight: 500;
+}
 
 #userSelection{
     margin-left: 10rem !important;
