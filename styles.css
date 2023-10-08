@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/back.jpg'); /* Replace 'your-image.jpg' with the actual path to your background image */
+    background-size: cover;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+#titleText{
+    font-size: 4rem;
+    font-weight: 800;
+}
+
+.centered-text {
+    text-align: center;
+    position: absolute;
+    top: 10%;
+    color: rgb(0, 0, 0);
+    font-family: 'Poppins', sans-serif;
+    width: 70%;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+/* Add margin to create horizontal space between elements */
+.dropdown {
+    margin-right: 1rem; /* Adjust the value as needed */
+}
+
+/* Add padding to the primary button if needed */
+.btn-primary {
+    margin-left: 3rem; /* Adjust the value as needed */
+}
+
+

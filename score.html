@@ -1,0 +1,816 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scores</title>
+    <link rel="stylesheet" type="text/css" href="scoreStyles.css">
+    <script src="https://kit.fontawesome.com/f885eed3b8.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    
+</head>
+<body>
+  <div class="center-container">
+    <h1 id="score">scores</h1>
+    <button type="button" id="homeButtonScore" class="btn btn-primary">Home <i class="fa-solid fa-house"></i></button>
+    <button type="button" id="tryAgain" class="btn btn-primary">Try Again</button>
+    <p>Here are the notes you got wrong:</p>
+    <div id="spanHolder"></div>
+  </div>
+
+<script>
+
+const displayArray = [
+  ["C", "D", "E", "F", "G", "A", "B", "C", "B", "A", "G", "F", "E", "D", "C"],
+  [
+    "Db",
+    "Eb",
+    "F",
+    "Gb",
+    "Ab",
+    "Bb",
+    "C",
+    "Db",
+    "C",
+    "Bb",
+    "Ab",
+    "Gb",
+    "F",
+    "Eb",
+    "Db",
+  ],
+  [
+    "D",
+    "E",
+    "F#",
+    "G",
+    "A",
+    "B",
+    "C#",
+    "D",
+    "C#",
+    "B",
+    "A",
+    "G",
+    "F#",
+    "E",
+    "D",
+  ],
+  [
+    "Eb",
+    "F",
+    "G",
+    "Ab",
+    "Bb",
+    "C",
+    "D",
+    "Eb",
+    "D",
+    "C",
+    "Bb",
+    "Ab",
+    "G",
+    "F",
+    "Eb",
+  ],
+  [
+    "E",
+    "F#",
+    "G#",
+    "A",
+    "B",
+    "C#",
+    "D#",
+    "E",
+    "D#",
+    "C#",
+    "B",
+    "A",
+    "G#",
+    "F#",
+    "E",
+  ],
+  ["F", "G", "A", "Bb", "C", "D", "E", "F", "E", "D", "C", "Bb", "A", "G", "F"],
+  [
+    "F#",
+    "G#",
+    "A#",
+    "B",
+    "C#",
+    "D#",
+    "E#",
+    "F#",
+    "E#",
+    "D#",
+    "C#",
+    "B",
+    "A#",
+    "G#",
+    "F#",
+  ],
+  ["G", "A", "B", "C", "D", "E", "F#", "G", "F#", "E", "D", "C", "B", "A", "G"],
+  [
+    "Ab",
+    "Bb",
+    "C",
+    "Db",
+    "Eb",
+    "F",
+    "G",
+    "Ab",
+    "G",
+    "F",
+    "Eb",
+    "Db",
+    "C",
+    "Bb",
+    "Ab",
+  ],
+  [
+    "A",
+    "B",
+    "C#",
+    "D",
+    "E",
+    "F#",
+    "G#",
+    "A",
+    "G#",
+    "F#",
+    "E",
+    "D",
+    "C#",
+    "B",
+    "A",
+  ],
+  [
+    "Bb",
+    "C",
+    "D",
+    "Eb",
+    "F",
+    "G",
+    "A",
+    "Bb",
+    "A",
+    "G",
+    "F",
+    "Eb",
+    "D",
+    "C",
+    "Bb",
+  ],
+  [
+    "B",
+    "C#",
+    "D#",
+    "E",
+    "F#",
+    "G#",
+    "A#",
+    "B",
+    "A#",
+    "G#",
+    "F#",
+    "E",
+    "D#",
+    "C#",
+    "B",
+  ],
+  [
+    "C",
+    "D",
+    "Eb",
+    "F",
+    "G",
+    "Ab",
+    "Bb",
+    "C",
+    "Bb",
+    "Ab",
+    "G",
+    "F",
+    "Eb",
+    "D",
+    "C",
+  ],
+  [
+    "C#",
+    "D#",
+    "E",
+    "F#",
+    "G#",
+    "A",
+    "B",
+    "C#",
+    "B",
+    "A",
+    "G#",
+    "F#",
+    "E",
+    "D#",
+    "C#",
+  ],
+  ["D", "E", "F", "G", "A", "Bb", "C", "D", "C", "Bb", "A", "G", "F", "E", "D"],
+  [
+    "Eb",
+    "F",
+    "Gb",
+    "Ab",
+    "Bb",
+    "Cb",
+    "Db",
+    "Eb",
+    "Db",
+    "Cb",
+    "Bb",
+    "Ab",
+    "Gb",
+    "F",
+    "Eb",
+  ],
+  ["E", "F#", "G", "A", "B", "C", "D", "E", "D", "C", "B", "A", "G", "F#", "E"],
+  [
+    "F",
+    "G",
+    "Ab",
+    "Bb",
+    "C",
+    "Db",
+    "Eb",
+    "F",
+    "Eb",
+    "Db",
+    "C",
+    "Bb",
+    "Ab",
+    "G",
+    "F",
+  ],
+  [
+    "F#",
+    "G#",
+    "A",
+    "B",
+    "C#",
+    "D",
+    "E",
+    "F#",
+    "E",
+    "D",
+    "C#",
+    "B",
+    "A",
+    "G#",
+    "F#",
+  ],
+  [
+    "G",
+    "A",
+    "Bb",
+    "C",
+    "D",
+    "Eb",
+    "F",
+    "G",
+    "F",
+    "Eb",
+    "D",
+    "C",
+    "Bb",
+    "A",
+    "G",
+  ],
+  [
+    "G#",
+    "A#",
+    "B",
+    "C#",
+    "D#",
+    "E",
+    "F#",
+    "G#",
+    "F#",
+    "E",
+    "D#",
+    "C#",
+    "B",
+    "A#",
+    "G#",
+  ],
+  ["A", "B", "C", "D", "E", "F", "G", "A", "G", "F", "E", "D", "C", "B", "A"],
+  [
+    "Bb",
+    "C",
+    "Db",
+    "Eb",
+    "F",
+    "Gb",
+    "Ab",
+    "Bb",
+    "Ab",
+    "Gb",
+    "F",
+    "Eb",
+    "Db",
+    "C",
+    "Bb",
+  ],
+  [
+    "B",
+    "C#",
+    "D",
+    "E",
+    "F#",
+    "G",
+    "A",
+    "B",
+    "A",
+    "G",
+    "F#",
+    "E",
+    "D",
+    "C#",
+    "B",
+  ],
+  [
+    "C",
+    "D",
+    "Eb",
+    "F",
+    "G",
+    "Ab",
+    "B",
+    "C",
+    "B",
+    "Ab",
+    "G",
+    "F",
+    "Eb",
+    "D",
+    "C",
+  ],
+  [
+    "C#",
+    "D#",
+    "E",
+    "F#",
+    "G#",
+    "A",
+    "B#",
+    "C#",
+    "B#",
+    "A",
+    "G#",
+    "F#",
+    "E",
+    "D#",
+    "C#",
+  ],
+  [
+    "D",
+    "E",
+    "F",
+    "G",
+    "A",
+    "Bb",
+    "C#",
+    "D",
+    "C#",
+    "Bb",
+    "A",
+    "G",
+    "F",
+    "E",
+    "D",
+  ],
+  [
+    "Eb",
+    "F",
+    "Gb",
+    "Ab",
+    "Bb",
+    "Cb",
+    "D",
+    "Eb",
+    "D",
+    "Cb",
+    "Bb",
+    "Ab",
+    "Gb",
+    "F",
+    "Eb",
+  ],
+  [
+    "E",
+    "F#",
+    "G",
+    "A",
+    "B",
+    "C",
+    "D#",
+    "E",
+    "D#",
+    "C",
+    "B",
+    "A",
+    "G",
+    "F#",
+    "E",
+  ],
+  [
+    "F",
+    "G",
+    "Ab",
+    "Bb",
+    "C",
+    "Db",
+    "E",
+    "F",
+    "E",
+    "Db",
+    "C",
+    "Bb",
+    "Ab",
+    "G",
+    "F",
+  ],
+  [
+    "F#",
+    "G#",
+    "A",
+    "B",
+    "C#",
+    "D",
+    "E#",
+    "F#",
+    "E#",
+    "D",
+    "C#",
+    "B",
+    "A",
+    "G#",
+    "F#",
+  ],
+  [
+    "G",
+    "A",
+    "Bb",
+    "C",
+    "D",
+    "Eb",
+    "F#",
+    "G",
+    "F#",
+    "Eb",
+    "D",
+    "C",
+    "Bb",
+    "A",
+    "G",
+  ],
+  [
+    "Ab",
+    "Bb",
+    "Cb",
+    "Db",
+    "Eb",
+    "Fb",
+    "G",
+    "Ab",
+    "G",
+    "Fb",
+    "Eb",
+    "Db",
+    "Cb",
+    "Bb",
+    "Ab",
+  ],
+  ["A", "B", "C", "D", "E", "F", "G#", "A", "G#", "F", "E", "D", "C", "B", "A"],
+  [
+    "Bb",
+    "C",
+    "Db",
+    "Eb",
+    "F",
+    "Gb",
+    "A",
+    "Bb",
+    "A",
+    "Gb",
+    "F",
+    "Eb",
+    "Db",
+    "C",
+    "Bb",
+  ],
+  [
+    "B",
+    "C#",
+    "D",
+    "E",
+    "F#",
+    "G",
+    "A#",
+    "B",
+    "A#",
+    "G",
+    "F#",
+    "E",
+    "D",
+    "C#",
+    "B",
+  ],
+  [
+    "C",
+    "D",
+    "Eb",
+    "F",
+    "G",
+    "A",
+    "B",
+    "C",
+    "Bb",
+    "Ab",
+    "G",
+    "F",
+    "Eb",
+    "D",
+    "C",
+  ],
+  [
+    "C#",
+    "D#",
+    "E",
+    "F#",
+    "G#",
+    "A#",
+    "B#",
+    "C#",
+    "B",
+    "A",
+    "G#",
+    "F#",
+    "E",
+    "D#",
+    "C#",
+  ],
+  ["D", "E", "F", "G", "A", "B", "C#", "D", "C", "Bb", "A", "G", "F", "E", "D"],
+  [
+    "Eb",
+    "F",
+    "Gb",
+    "Ab",
+    "Bb",
+    "C",
+    "D",
+    "Eb",
+    "Db",
+    "Cb",
+    "Bb",
+    "Ab",
+    "Gb",
+    "F",
+    "Eb",
+  ],
+  [
+    "E",
+    "F#",
+    "G",
+    "A",
+    "B",
+    "C#",
+    "D#",
+    "E",
+    "D",
+    "C",
+    "B",
+    "A",
+    "G",
+    "F#",
+    "E",
+  ],
+  [
+    "F",
+    "G",
+    "Ab",
+    "Bb",
+    "C",
+    "D",
+    "E",
+    "F",
+    "Eb",
+    "Db",
+    "C",
+    "Bb",
+    "Ab",
+    "G",
+    "F",
+  ],
+  [
+    "F#",
+    "G#",
+    "A",
+    "B",
+    "C#",
+    "D#",
+    "E#",
+    "F#",
+    "E",
+    "D",
+    "C#",
+    "B",
+    "A",
+    "G#",
+    "F#",
+  ],
+  [
+    "G",
+    "A",
+    "Bb",
+    "C",
+    "D",
+    "E",
+    "F#",
+    "G",
+    "F",
+    "Eb",
+    "D",
+    "C",
+    "Bb",
+    "A",
+    "G",
+  ],
+  [
+    "Ab",
+    "Bb",
+    "Cb",
+    "Db",
+    "Eb",
+    "F",
+    "G",
+    "Ab",
+    "Gb",
+    "Fb",
+    "Eb",
+    "Db",
+    "Cb",
+    "Bb",
+    "Ab",
+  ],
+  ["A", "B", "C", "D", "E", "F#", "G#", "A", "G", "F", "E", "D", "C", "B", "A"],
+  [
+    "Bb",
+    "C",
+    "Db",
+    "Eb",
+    "F",
+    "G",
+    "A",
+    "Bb",
+    "Ab",
+    "Gb",
+    "F",
+    "Eb",
+    "Db",
+    "C",
+    "Bb",
+  ],
+  [
+    "B",
+    "C#",
+    "D",
+    "E",
+    "F#",
+    "G#",
+    "A#",
+    "B",
+    "A",
+    "G",
+    "F#",
+    "E",
+    "D",
+    "C#",
+    "B",
+  ],
+];
+
+    
+    // Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    let transpositionDelta = urlParams.get(
+        "delta"
+      );
+
+    console.log(transpositionDelta)
+    
+    // Retrieve the value of the "score" parameter
+    const scoreValue = urlParams.get("points");
+    
+    // Get the <h1> element by its ID
+    const h1Element = document.getElementById("score");
+    
+    // Set the text content of the <h1> element to the score value
+    if (scoreValue !== null) {
+        h1Element.textContent = scoreValue;
+    }
+
+    // Give feedback based off of percentage value (rounded to two places)
+    let percentage = (scoreValue/15) * 100;
+    percentage = percentage.toFixed(2); 
+    if(percentage >= 100){
+        h1Element.textContent = percentage + "%: Superior score!";
+    }
+    else if(percentage > 90){
+        h1Element.textContent = percentage + "%: Excellent score!";
+    }
+    else if(percentage > 80){
+        h1Element.textContent = percentage + "%: Good score!";
+    }
+    else{
+        h1Element.textContent = percentage + "%: Try to practice more to beat your score!";
+    }
+
+    const homeButton = document.getElementById("homeButtonScore");
+
+    // Add a click event listener to the button
+    homeButton.addEventListener("click", function () {
+    // Navigate to the desired HTML page
+    window.location.href = "index.html";
+    });
+
+    const tryAgain = document.getElementById("tryAgain");
+    const urlParamsIndex = new URLSearchParams(window.location.search);
+    const scaleIndex = urlParamsIndex.get("index");
+
+    // Add a click event listener to the button
+    tryAgain.addEventListener("click", function () {
+    // Navigate to the desired HTML page
+    window.location.href = `scales.html?index=${scaleIndex}&scale=${urlParams.get("scale")}&mm=${urlParams.get("mm")}&transposition=${urlParams.get(
+        "transposition"
+      )}`;
+    });
+
+    // splits up index string into an arr of ints storing the indexes of wrong notes
+    const wrongIndexes = urlParams.get("wrong");
+    function wrongToIntegerArray(wrongIndexes) {
+        // Split the input string into an array using hyphen as the delimiter
+        const parts = wrongIndexes.split('-');
+        console.log(parts)
+        
+        // Use the map function to convert the parts into integers
+        const integerArray = parts.map(part => parseInt(part, 10));
+        
+        return integerArray;
+    }
+
+    // the arr of integers representing wrong notes (indexes)
+    let newIn = wrongToIntegerArray(wrongIndexes);
+
+    // Create transScaleIndex for transposed wrong notes
+    let scaleType = Math.floor(scaleIndex / 12);
+    let transScaleIndex = scaleIndex % 12;
+    transScaleIndex -= transpositionDelta;
+    if (transScaleIndex < 0) transScaleIndex += 12;
+    if (transScaleIndex > 11) transScaleIndex -= 12;
+    transScaleIndex += 12 * scaleType;
+
+    console.log(newIn)
+
+    let spanContainer = document.getElementById('spanHolder')
+
+  
+
+    function createSpanElementsFromArray(newIn) {
+  const container = document.createElement("div"); // Create a container element to hold the <span> elements
+
+  const uniqueDisplayValues = new Set(); // Use a Set to track unique display values
+
+  // Iterate through the array of strings and create a <span> element for each string
+  for (let inte of wrongIndexes) {
+    let display = displayArray[transScaleIndex][inte]; // Get the display value
+    if (!uniqueDisplayValues.has(display)) {
+      const span = document.createElement("span"); // Create a <span> element
+      span.id = display; // Set the id of the <span> element to the display value
+
+      span.textContent = display; // Set the text content of the <span> element
+      span.textContent += " ";
+      container.appendChild(span); // Append the <span> element to the container
+      uniqueDisplayValues.add(display); // Add the display value to the Set to mark it as seen
+    }
+  }
+
+  return container; // Return the container with unique <span> elements based on display values
+}
+    let container = createSpanElementsFromArray(wrongIndexes);
+    spanContainer.appendChild(container);
+    
+
+</script>
+
+</body>
+
+</html>
