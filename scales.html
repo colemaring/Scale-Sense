@@ -2,74 +2,63 @@
 
 <head>
   <meta charset="UTF-8">
-
   <title>Scale Sense</title>
-  <link rel="stylesheet" type="text/css" href="scaleStyles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
-  <script src="https://kit.fontawesome.com/f885eed3b8.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js" type="text/javascript"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" type="text/css" href="styles/scaleStyles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a id = "scalesense" class="navbar-brand">Scale Sense</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <a id="scalesense" class="navbar-brand">Scale Sense</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a id = "userSelection" class="nav-link mx-auto" aria-current="page">You chose concert scale and scale</a>
+            <a id="userSelection" class="nav-link mx-auto" aria-current="page">You chose concert scale and scale</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" id='status'>Loading Model...</a>
           </li>
         </ul>
-        <!-- Button pushed to the right -->
-        <button type="button" id = 'homeButton' class="btn btn-primary">Home <i class="fa-solid fa-house"></i></button>
-        
+        <button type="button" id='homeButton' class="btn btn-primary">Home <i class="fa-solid fa-house"></i></button>
       </div>
     </div>
   </nav>
-  <!-- <span id = "C">C  </span>
-  <span id = "Csharp">C# </span>
-  <span id = "D">D  </span>
-  <span id = "Dsharp">D#  </span>
-  <span id = "E">E  </span>
-  <span id = "F">F  </span>
-  <span id = "Fsharp">F#  </span>
-  <span id = "G">G  </span>
-  <span id = "Gsharp">G#  </span>
-  <span id = "A">A  </span>
-  <span id = "Asharp">A#  </span>
-  <span id = "B">B  </span> -->
 
-  
   <div class="slider-container">
-    <label id = 'sens' for="slider" class="slider-label">Sensitivity:</label>
+    <label id='sens' for="slider" class="slider-label">Sensitivity:</label>
     <input type="range" min="10" max="50" value="30" class="slider" id="slider">
-    <p id="transpositionVal">Transposition: Concert</p>
+    <p id="transpositionVal">Transposition: Loading...</p>
   </div>
-  <div id = "holdSpan">
+  <div id="holdSpan">
 
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+  <script src="https://kit.fontawesome.com/f885eed3b8.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js" type="text/javascript"></script>
+  <script src = "scale-data.js"></script>
   <script src="main.js"></script>
-  <script src="index.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

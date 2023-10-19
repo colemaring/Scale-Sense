@@ -1,37 +1,33 @@
 // Get references to the dropdowns and the start button
-const startingPitchDropdown = document.getElementById("dropdownMenuButton1");
-const scaleDropdown = document.getElementById("dropdownMenuButton2");
+const startingPitchDropdown = document.getElementById("startingPitchDropdown");
+const scaleDropdown = document.getElementById("chooseScaleDropdown");
+const transpositionDropdown = document.getElementById("transpositionDropdown");
 const startButton = document.getElementById("startButton");
-const transpositionDropdown = document.getElementById("dropdownMenuButton3");
 
-if (startButton) {
-  // Add a click event listener to the start button
-  startButton.addEventListener("click", function () {
-    scaleValue = scaleDropdown.innerText;
-    startingPitchValue = startingPitchDropdown.innerText;
-    let transpositionValue = transpositionDropdown.innerText;
-
-    yourFunction(startingPitchValue, scaleValue, transpositionValue);
-    let trans = transpositionDropdown.innerText;
-    console.log(trans + "hello");
+// JQuery to set text of dropdown to the selected item
+$(document).ready(function () {
+  // Handle the click event on dropdown items
+  $(".dropdown-menu a").click(function () {
+    // Get the text of the clicked item
+    var newText = $(this).text();
+    // Find the parent dropdown button and update its text
+    $(this).closest(".dropdown").find(".dropdown-toggle").text(newText);
   });
-}
+});
 
-function yourFunction(startingPitch, scale, transpositionValue) {
-  // Do something with the selected values
-  //   console.log(startingPitch + " " + scale);
-  //   console.log("Starting Pitch:", startingPitch);
-  //   console.log("Scale:", scale);
-  //   window.startingPitch;
-  //   window.scale;
+// On start button click, send dropdown values to assignIndex
+startButton.addEventListener("click", function () {
+  assignIndex(
+    startingPitchDropdown.innerText,
+    scaleDropdown.innerText,
+    transpositionDropdown.innerText
+  );
+});
 
+// Assigns a unique index to the chosen scale combination
+function assignIndex(startingPitch, scale, transpositionValue) {
   if (startingPitch === "Starting Pitch " || scale === "Scale ") {
-    console.log("select stuff");
   } else {
-    // Redirect to scales.html
-    // window.location.href = "scales.html";
-    // logic for conversion of startingPitch/scale to int value
-    // index is a global variable
     let index;
     switch (startingPitch) {
       case "Concert_C":
@@ -75,15 +71,14 @@ function yourFunction(startingPitch, scale, transpositionValue) {
         index = 0;
     }
 
-    if (scaleValue === "Minor") {
+    if (scale === "Minor") {
       index += 12;
-    } else if (scaleValue === "Harmonic Minor") {
+    } else if (scale === "Harmonic Minor") {
       index += 24;
-    } else if (scaleValue === "Melodic Minor") {
+    } else if (scale === "Melodic Minor") {
       index += 36;
     }
 
-    //window.index = index;
     window.location.href = `scales.html?index=${index}&transposition=${transpositionValue}&mm=${scale}&scale=${startingPitch}`;
   }
 }
