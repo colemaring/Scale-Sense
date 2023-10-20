@@ -5,6 +5,13 @@ Scale Sense is a web-based learning tool that utilizes machine learning (ml5.js 
 # Try it yourself
 www.scalesense.xyz
 
+# Screenshots
+![original](https://github.com/colemaring/Scale-Sense/assets/65455664/785547dc-e5e7-4452-b2b1-e6f168783ee8)
+![original (1)](https://github.com/colemaring/Scale-Sense/assets/65455664/24d1b907-d688-4707-9dbf-cff556758037)
+![original (2)](https://github.com/colemaring/Scale-Sense/assets/65455664/a37fa101-c3c9-4b6e-9f14-4c5e648d518c)
+
+
+
 # Installation / Deployment
 git clone https://github.com/colemaring/Scale-Sense.git && cd Scale-Sense
 
@@ -12,5 +19,5 @@ npm install
 
 npm run dev
 
-# Note:
-reformatted on 10/19/2023 for readability
+### Note
+Reformatted on 10/19/2023 for readability
